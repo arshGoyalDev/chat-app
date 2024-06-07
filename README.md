@@ -23,4 +23,4 @@ A chat app for personal chats, team chats, friends and family chats.
 ## Author
 
 - [Email](mailto:arshgoyalDev@gmail.com)
-- [Twitter](https://twitter.com/arshWebDev)
+- [Twitter](https://twitter.com/arshGoyalDev)
