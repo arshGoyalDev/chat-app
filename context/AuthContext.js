@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signInWithRedirect,
   signOut,
 } from "firebase/auth";
@@ -18,7 +19,7 @@ const useAuth = () => useContext(AuthContext);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  console.log(user);
+  // console.log(user);
 
   // useEffect(() => {
   //   onSnapshot()
@@ -26,12 +27,10 @@ const AuthProvider = ({ children }) => {
 
   const getUserCred = (uid) => {
     // const userRef = doc(db, "users", uid);
-
     // const userCred = onSnapshot(userRef, (fetchedData) => {
     //   console.log({ ...fetchedData.data() });
     //   setUser({ ...fetchedData.data() });
     // });
-
     // userCred();
   };
 
@@ -98,9 +97,27 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const googleAuth = async (form) => {
+  const googleAuth = async (form, setLoading, router) => {
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider);
+    signInWithPopup(auth, provider).then(async (result) => {
+      console.log(result.user);
+      setUser(result.user.uid);
+
+      await createUserDoc(result.user.uid, result.user.displayName.replace(/\s/g,'')
+      , result.user.email)
+
+      setLoading(false);
+      
+      if (form === "sign-up") {
+        router.push({
+          pathname: "get-started",
+        });
+      } else if (form === "login") {
+        router.push({
+          pathname: "login",
+        });
+      }
+    });
   };
 
   const logout = async () => {
@@ -109,18 +126,10 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateDetails = async (name, about) => {
-    console.log("Nothing's here");
-    // console.log("Working! Yeah!");
-
-    // console.log(user);
-    // // const userRef = doc(db, "users", user);
-
-    await updateDoc( doc(db, "users", (user ?? localStorage.getItem("uid"))), {
-      "name": name,
-      "about": about,      
-    })
-
-    // // return ;
+    await updateDoc(doc(db, "users", user), {
+      name: name,
+      about: about,
+    });
   };
 
   return (

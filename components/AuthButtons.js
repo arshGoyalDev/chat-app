@@ -12,36 +12,41 @@ const AuthButtons = ({ form }) => {
 
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   getRedirectResult(auth)
-  //     .then((redirectResult) => {
-  //       const userCred = redirectResult.user;
-  //       console.log(userCred);
+  useEffect(() => {
 
-  //       setLoading(false);
-  //       if (form === "sign-up") {
-  //         router.push({
-  //           pathname: "get-started",
-  //         });
-  //       } else if (form === "login") {
-  //         router.push({
-  //           pathname: "login",
-  //         });
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
+    // popup
 
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+    // getRedirectResult(auth)
+    //   .then((redirectResult) => {
+    //     console.log("hello")
+    //   // }
+    //   //   const userCred = redirectResult.user;
+    //   //   console.log(userCred);
+
+    //   //   setLoading(false);
+    //   //   if (form === "sign-up") {
+    //   //     router.push({
+    //   //       pathname: "get-started",
+    //   //     });
+    //   //   } else if (form === "login") {
+    //   //     router.push({
+    //   //       pathname: "login",
+    //   //     });
+    //   //   }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex items-center gap-2 mt-6">
       <button
         onClick={() => {
           setLoading(true);
-          googleAuth(form);
+          googleAuth(form, setLoading, router);
         }}
         className="flex items-center justify-center gap-2 w-full h-12 py-3 px-4 bg-gray-100 dark:bg-zinc-800 rounded-lg"
       >
@@ -70,7 +75,7 @@ const AuthButtons = ({ form }) => {
         )}
       </button>
 
-      <button className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-gray-100 dark:bg-zinc-800 rounded-lg">
+      {/* <button className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-gray-100 dark:bg-zinc-800 rounded-lg">
         <span className="icon">
           <svg
             width="25"
@@ -83,7 +88,7 @@ const AuthButtons = ({ form }) => {
           </svg>
         </span>
         <span className="font-medium">Facebook</span>
-      </button>
+      </button> */}
     </div>
   );
 };

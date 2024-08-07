@@ -17,10 +17,9 @@ const GetStarted = () => {
   const [pic, setPic] = useState(null);
 
   const completeProfile = async () => {
-    await    updateDetails(name, about);
+    await updateDetails(name, about);
 
     console.log('done');
-    // addProfilePic(pic);
   }
 
   return (
