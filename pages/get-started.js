@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Head from "next/head";
 
@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import { Details, ProfilePic } from "../components/get-started";
 
 import { useAuth } from "../context";
+import { confirmPasswordReset } from "firebase/auth";
 
 const GetStarted = () => {
   const {updateDetails} = useAuth();

@@ -7,7 +7,6 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
 } from "firebase/auth";
 import { doc, setDoc, onSnapshot, updateDoc } from "firebase/firestore";
@@ -18,12 +17,6 @@ const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
-  // console.log(user);
-
-  // useEffect(() => {
-  //   onSnapshot()
-  // }, [])
 
   const getUserCred = (uid) => {
     // const userRef = doc(db, "users", uid);
@@ -103,11 +96,14 @@ const AuthProvider = ({ children }) => {
       console.log(result.user);
       setUser(result.user.uid);
 
-      await createUserDoc(result.user.uid, result.user.displayName.replace(/\s/g,'')
-      , result.user.email)
+      await createUserDoc(
+        result.user.uid,
+        result.user.displayName.replace(/\s/g, ""),
+        result.user.email
+      );
 
       setLoading(false);
-      
+
       if (form === "sign-up") {
         router.push({
           pathname: "get-started",
@@ -129,6 +125,7 @@ const AuthProvider = ({ children }) => {
     await updateDoc(doc(db, "users", user), {
       name: name,
       about: about,
+      profilePic: user,
     });
   };
 

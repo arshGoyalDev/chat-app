@@ -12,35 +12,6 @@ const AuthButtons = ({ form }) => {
 
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-
-    // popup
-
-    // getRedirectResult(auth)
-    //   .then((redirectResult) => {
-    //     console.log("hello")
-    //   // }
-    //   //   const userCred = redirectResult.user;
-    //   //   console.log(userCred);
-
-    //   //   setLoading(false);
-    //   //   if (form === "sign-up") {
-    //   //     router.push({
-    //   //       pathname: "get-started",
-    //   //     });
-    //   //   } else if (form === "login") {
-    //   //     router.push({
-    //   //       pathname: "login",
-    //   //     });
-    //   //   }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className="flex items-center gap-2 mt-6">
       <button
