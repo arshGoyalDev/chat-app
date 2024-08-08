@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 import Head from "next/head";
 
@@ -6,10 +6,11 @@ import Footer from "../components/Footer";
 import { Details, ProfilePic } from "../components/get-started";
 
 import { useAuth } from "../context";
-import { confirmPasswordReset } from "firebase/auth";
+import ImageUpload from "../components/get-started/ImageUpload";
+// import { confirmPasswordReset } from "firebase/auth";
 
 const GetStarted = () => {
-  const {updateDetails} = useAuth();
+  const { updateDetails } = useAuth();
   const [tab, setTab] = useState("details");
 
   const [name, setName] = useState("");
@@ -18,10 +19,15 @@ const GetStarted = () => {
   const [pic, setPic] = useState(null);
 
   const completeProfile = async () => {
-    await updateDetails(name, about);
+    await updateDetails(name, about, pic);
 
-    console.log('done');
-  }
+    console.log("done");
+  };
+
+  useEffect(() => {
+    console.log(pic)
+  }, [pic])
+  
 
   return (
     <main className="min-h-screen flex flex-col gap-8 items-center justify-between pt-16 md:pt-20">
@@ -64,7 +70,8 @@ const GetStarted = () => {
         )}
 
         {tab === "profile-pic" && (
-          <ProfilePic pic={pic} setPic={setPic} completeProfile={completeProfile} />
+          <ImageUpload pic={pic} setPic={setPic} completeProfile={completeProfile} />
+          // <ProfilePic pic={pic} setPic={setPic} completeProfile={completeProfile} />
         )}
       </section>
 

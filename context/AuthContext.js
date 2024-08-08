@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-import { auth, db } from "../config/firebase";
+import { auth, db, imageDb } from "../config/firebase";
 
 import {
   createUserWithEmailAndPassword,
@@ -10,6 +10,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { doc, setDoc, onSnapshot, updateDoc } from "firebase/firestore";
+import { uploadBytes, ref } from "firebase/storage";
 
 const AuthContext = createContext(null);
 
@@ -121,7 +122,9 @@ const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const updateDetails = async (name, about) => {
+  const updateDetails = async (name, about, pic) => {
+    const imgRef = ref(imageDb, `profile-pics/${user}`);
+    uploadBytes(imgRef, pic);
     await updateDoc(doc(db, "users", user), {
       name: name,
       about: about,
