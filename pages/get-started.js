@@ -3,10 +3,9 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 
 import Footer from "../components/Footer";
-import { Details, ProfilePic } from "../components/get-started";
+import { Details, ImageUpload } from "../components/get-started";
 
 import { useAuth } from "../context";
-import ImageUpload from "../components/get-started/ImageUpload";
 // import { confirmPasswordReset } from "firebase/auth";
 
 const GetStarted = () => {
@@ -71,7 +70,6 @@ const GetStarted = () => {
 
         {tab === "profile-pic" && (
           <ImageUpload pic={pic} setPic={setPic} completeProfile={completeProfile} />
-          // <ProfilePic pic={pic} setPic={setPic} completeProfile={completeProfile} />
         )}
       </section>
 

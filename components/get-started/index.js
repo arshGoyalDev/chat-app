@@ -1,4 +1,4 @@
 import Details from "./Details";
-import ProfilePic from "./ProfilePic";
+import ImageUpload from "./ImageUpload";
 
-export { Details, ProfilePic };
+export { Details, ImageUpload };

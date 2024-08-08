@@ -94,12 +94,11 @@ const AuthProvider = ({ children }) => {
   const googleAuth = async (form, setLoading, router) => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then(async (result) => {
-      console.log(result.user);
       setUser(result.user.uid);
 
       await createUserDoc(
         result.user.uid,
-        result.user.displayName.replace(/\s/g, ""),
+        result.user.displayName.replace(/\s/g, "").toLowerCase(),
         result.user.email
       );
 
